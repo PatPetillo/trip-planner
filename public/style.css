@@ -7,3 +7,20 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #C1B5AD;
 }
+
+.mapboxgl-marker{
+    width: 32px;
+    height: 32px;
+}
+
+.hotel-marker {
+    background-image: url("http://i.imgur.com/D9574Cu.png");
+}
+
+.activity-marker {
+    background-image: url("http://i.imgur.com/WbMOfMl.png");
+}
+
+.restaurant-marker{
+    background-image: url("http://i.imgur.com/cqR6pUI.png");
+}
