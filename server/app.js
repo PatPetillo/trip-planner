@@ -2,16 +2,19 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const router = require('../routes');
 
-const db = require('./models').db
+const db = require('../models').db
 
 const app = express();
 
-app.use(morgan);
+app.use(morgan('default'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static(path.join(__dirname, "..", "public")))
+
+app.use('/', router);
 
 app.use(function(req, res, next){
     let err = new Error('Not Found');
