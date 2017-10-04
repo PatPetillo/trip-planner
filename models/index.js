@@ -40,4 +40,4 @@ Hotel.belongsTo(Place);
 Activity.belongsTo(Place);
 Restaurant.belongsTo(Place);
 
-module.exports = { Place, Hotel, Activity, Restaurant, db};
+module.exports = {Place, Hotel, Activity, Restaurant, db};
