@@ -11,9 +11,6 @@ const map = new Map({
 	style: "mapbox://styles/mapbox/streets-v10"
 })
 
-const marker = buildMarker('hotels', [-74.009, 40.705])
-marker.addTo(map)
-
 fetch('../api').then(function (response) {
 	return response.json();
 }).then(function (attractions) {
@@ -41,13 +38,34 @@ fetch('../api').then(function (response) {
 	});
 });
 
+let markerObjs = {};
 document.getElementById('hotels-add').addEventListener('click', function() {
+
 	let hotels = document.getElementById('hotels-choices');
 	let hotelElement = hotels.options[hotels.selectedIndex];
-	let hotelLi = document.createElement('li');
-	let textNode = document.createTextNode(hotelElement.innerHTML);
-	hotelLi.appendChild(textNode);
+	let hotelLi = document.createElement('li')
+	hotelLi.innerHTML = hotelElement.innerHTML;
+	// let textNode = document.createTextNode(hotelElement.innerHTML);
+	// hotelLi.appendChild(textNode);
+
+	let div = document.createElement('div');
+	let textNodeDiv = document.createTextNode('x')
+	div.appendChild(textNodeDiv)
+	hotelLi.append(div);
+
 	let hotelItin = document.getElementById('hotels-list');
 	hotelItin.append(hotelLi);
-	buildMarker('hotels', hotelElement.value.split(',').map(element => Number(element))).addTo(map);
+	let marker = buildMarker('hotels', hotelElement.value.split(',').map(element => Number(element)))
+
+	markerObjs[hotelElement.innerHTML] = marker;
+	console.log(markerObjs);
+
+	marker.addTo(map);
+
+	div.addEventListener('click', () => {
+		// console.log(markerObjs[(hotelLi.innerHTML.slice(0, hotelLi.innerHTML.indexOf('<')))]);
+		hotelLi.remove(hotelLi);
+		// map.removeLayer(markerObjs[(hotelLi.innerHTML.slice(0, hotelLi.innerHTML.indexOf('<')))])
+	})
 });
+
